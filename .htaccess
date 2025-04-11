@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /rahmanfood_api/
+
+# Si le fichier ou répertoire n'existe pas physiquement
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Réécrire toutes les requêtes vers index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
