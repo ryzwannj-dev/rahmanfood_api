@@ -13,6 +13,7 @@ require_once 'controllers/tacos.php';
 require_once 'controllers/all_products.php';
 require_once 'controllers/ingredients.php';
 require_once 'controllers/type_ingredients.php';
+require_once 'controllers/add_supplement.php';
 
 
 $database = new Database();
@@ -99,6 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($path) {
         case 'add_ingredient':
             $response = addIngredient();
+            break;
+        case 'add_supplement':
+            $response = addSupplement();
             break;
     }
 
