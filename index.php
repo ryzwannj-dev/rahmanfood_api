@@ -11,9 +11,13 @@ require_once 'controllers/assiettes.php';
 require_once 'controllers/boissons_desserts.php';
 require_once 'controllers/tacos.php';
 require_once 'controllers/all_products.php';
+require_once 'controllers/ingredients.php';
+require_once 'controllers/type_ingredients.php';
+
 
 $database = new Database();
 $db = $database->connect();
+$GLOBALS['db'] = $db;
 
 $request_uri = $_SERVER['REQUEST_URI'];
 $request_path = parse_url($request_uri, PHP_URL_PATH);
@@ -71,12 +75,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $response = getTacos();
             break;
             
+        case 'get_all_ingredients':
+            $response = getAllIngredients();
+            break;
+
+        case 'get_all_types':
+            $response = getAllType();
+            break;
+            
         default:
             http_response_code(404);
             $response = ['error' => 'Endpoint non trouvé'];
             break;
     }
     
+    echo json_encode($response);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $response = [];
+
+    // Switch sur le chemin de l'API (add_ingredient)
+    switch ($path) {
+        case 'add_ingredient':
+            $response = addIngredient();
+            break;
+    }
+
+    // Répondre avec les résultats (en format JSON)
     echo json_encode($response);
 }
 
