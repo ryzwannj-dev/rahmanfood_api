@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../database.php';
 
-function addSupplement() {
+function addSupplementGratine() {
     global $db;
     $nom = $_POST['nom'] ?? null;
     $prix = $_POST['prix'] ?? null;
@@ -10,8 +10,8 @@ function addSupplement() {
         return ['error' => 'Champs requis manquants'];
     }
 
-    $unique_id = 'supp_' . uniqid();
-    $query = "INSERT INTO supplement (id_supplement, nom_supplement, prix_supplement) 
+    $unique_id = 'gratine_' . uniqid();
+    $query = "INSERT INTO supplement_gratine (id_supplement_gratine, nom_supplement_gratine, supplement_gratine_prix) 
               VALUES (?, ?, ?)";
     $stmt = $db->prepare($query);
 
@@ -23,11 +23,11 @@ function addSupplement() {
 
     if ($stmt->execute()) {
         return [
-            'message' => 'Supplement ajouté avec succès',
+            'message' => 'Supplement Gratine ajouté avec succès',
             'id' => $unique_id
         ];
     } else {
-        return ['error' => 'Erreur lors de l\'ajout d\'un supplement'];
+        return ['error' => 'Erreur lors de l\'ajout d\'un supplement gratine'];
     }
 
 }

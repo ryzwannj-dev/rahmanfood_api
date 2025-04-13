@@ -14,7 +14,9 @@ require_once 'controllers/all_products.php';
 require_once 'controllers/ingredients.php';
 require_once 'controllers/type_ingredients.php';
 require_once 'controllers/add_supplement.php';
-
+require_once 'controllers/add_supplement_gratine.php';
+require_once 'controllers/add_boisson.php';
+require_once 'controllers/add_dessert.php';
 
 $database = new Database();
 $db = $database->connect();
@@ -103,6 +105,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'add_supplement':
             $response = addSupplement();
+            break;
+        case 'add_supplement_gratine':
+            $response = addSupplementGratine();
+            break;
+        case 'add_boisson':
+            $response = addBoisson();
+            break;
+        case 'add_dessert':
+            $response = addDessert();
             break;
     }
 
