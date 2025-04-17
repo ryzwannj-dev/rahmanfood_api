@@ -17,6 +17,14 @@ require_once 'controllers/add_supplement.php';
 require_once 'controllers/add_supplement_gratine.php';
 require_once 'controllers/add_boisson.php';
 require_once 'controllers/add_dessert.php';
+require_once 'controllers/all_ingredients.php';
+require_once 'controllers/all_supplements.php';
+require_once 'controllers/all_supplements_gratine.php';
+require_once 'controllers/delete_ingredient.php';
+require_once 'controllers/delete_supplement.php';
+require_once 'controllers/delete_supplement_gratine.php';
+require_once 'controllers/edit_supplement_gratine.php';
+require_once 'controllers/edit_ingredients.php';
 
 $database = new Database();
 $db = $database->connect();
@@ -85,6 +93,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         case 'get_all_types':
             $response = getAllType();
             break;
+        
+        case 'get_ingredients':
+            $response = get_Ingredients();
+            break;
+
+        case 'get_all_supplements':
+            $response = get_Supplements();
+            break;
+        
+        case 'get_all_supplements_gratine':
+            $response = get_Supplements_Gratine();
+            break;
             
         default:
             http_response_code(404);
@@ -100,6 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Switch sur le chemin de l'API (add_ingredient)
     switch ($path) {
+        case 'delete_ingredient':
+            $response = deleteIngredient();
+            break;
         case 'add_ingredient':
             $response = addIngredient();
             break;
@@ -114,6 +137,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'add_dessert':
             $response = addDessert();
+            break;
+        case 'delete_supplement':
+            $response = deleteSupplementById();
+            break;
+        case 'delete_supplement_gratine':
+            $response = deleteSupplementGratineById();
+            break;
+        case 'edit_supplement_gratine':
+            $response = editSupplementGratine();
+            break;
+        case 'edit_ingredient':
+            $response = editIngredient();
             break;
     }
 
